@@ -1,0 +1,29 @@
+# Sample Medical Knowledge for RAG
+
+Test: Hemoglobin (Hb)
+Reference Range: 
+- Men: 13.5 to 17.5 g/dL
+- Women: 12.0 to 15.5 g/dL
+Explanation: Hemoglobin is a protein in red blood cells that carries oxygen. Low levels may indicate anemia.
+
+Test: White Blood Cell (WBC) Count
+Reference Range: 4,500 to 11,000 cells per microliter (mcL)
+Explanation: WBCs help the body fight infection. High counts suggest infection or inflammation.
+
+Test: Platelet Count
+Reference Range: 150,000 to 450,000 platelets/mcL
+Explanation: Platelets help with blood clotting. Low levels (thrombocytopenia) can cause bleeding issues.
+
+Test: HbA1c (Glycated Hemoglobin)
+Reference Range:
+- Normal: Below 5.7%
+- Prediabetes: 5.7% to 6.4%
+- Diabetes: 6.5% or higher
+Explanation: HbA1c measures average blood sugar over the last 3 months. Used for diabetes management.
+
+Test: Fasting Blood Sugar
+Reference Range:
+- Normal: 70–99 mg/dL
+- Prediabetes: 100–125 mg/dL
+- Diabetes: 126 mg/dL or higher
+Explanation: Sugar levels in blood after at least 8 hours of fasting. Used to screen for diabetes.
