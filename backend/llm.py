@@ -6,7 +6,7 @@ from backend.logger import log_info, log_error, log_warning
 
 # Configure the Gemini API
 if Config.GEMINI_API_KEY:
-    genai.configure(api_key=Config.GEMINI_API_KEY)
+    genai.configure(api_key=Config.GOOGLE_API_KEY)
 
 def generate_response(prompt: str, retry_count: int = 3) -> str:
     """

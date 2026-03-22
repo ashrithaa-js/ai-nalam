@@ -6,6 +6,7 @@ load_dotenv()
 
 class Config:
     # API Keys
+    GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
     GEMINI_API_KEY = os.getenv("GOOGLE_API_KEY")
     SARVAM_API_KEY = os.getenv("SARVAM_API_KEY")
 

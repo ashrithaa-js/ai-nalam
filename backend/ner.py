@@ -5,7 +5,7 @@ from backend.logger import log_info, log_error
 
 # Configure Gemini
 if Config.GEMINI_API_KEY:
-    genai.configure(api_key=Config.GEMINI_API_KEY)
+    genai.configure(api_key=Config.GOOGLE_API_KEY)
 
 def extract_medical_entities(text: str):
     """

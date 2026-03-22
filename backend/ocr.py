@@ -8,7 +8,7 @@ def extract_text_from_image(image_file) -> str:
         if not Config.GEMINI_API_KEY:
             return "Error: GEMINI_API_KEY not set."
 
-        genai.configure(api_key=Config.GEMINI_API_KEY)
+        genai.configure(api_key=Config.GOOGLE_API_KEY)
 
         img = Image.open(image_file)
         model = genai.GenerativeModel(Config.GEMINI_OCR_MODEL)

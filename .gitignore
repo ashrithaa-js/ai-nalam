@@ -1,0 +1,5 @@
+.env
+__pycache__/
+*.pyc
+nalam_app.log
+data/faiss_index/

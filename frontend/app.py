@@ -82,9 +82,17 @@ st.markdown("""
         font-size: 0.88rem;
     }
 
-    /* SideBar Lock */
+    /* SideBar Styling */
     [data-testid="stSidebar"] {
-        overflow: hidden !important;
+        background-color: #111827 !important; /* Darker Sidebar */
+    }
+    
+    /* Sidebar chat messages compact */
+    [data-testid="stSidebar"] .stChatMessage {
+        background-color: rgba(255, 255, 255, 0.05) !important;
+        border-radius: 10px;
+        padding: 5px;
+        margin-bottom: 5px;
     }
     
     .health-score-container {
@@ -115,16 +123,31 @@ if 'chat_history' not in st.session_state:
 
 # --- SIDEBAR ---
 with st.sidebar:
-    st.image("https://cdn-icons-png.flaticon.com/512/2966/2966327.png", width=70)
+    st.image("https://cdn-icons-png.flaticon.com/512/2966/2966327.png", width=60)
     st.title("Nalam AI")
-    st.markdown("<p style='font-size:0.85rem; opacity:0.7;'>v2.4 Platinum Edition</p>", unsafe_allow_html=True)
+    st.markdown("<p style='font-size:0.80rem; opacity:0.6;'>v2.4 Platinum Edition</p>", unsafe_allow_html=True)
     
-    st.markdown("<div style='height: 58vh;'></div>", unsafe_allow_html=True) 
-    
+    # Reset Button Moved to the TOP
     if st.button("🗑️ Reset Data", use_container_width=True):
         st.session_state.extracted_text = ""
         st.session_state.analysis_results = None
         st.session_state.chat_history = []
+        st.rerun()
+
+    st.markdown("---")
+    st.subheader("💬 Ask Nalam AI")
+    
+    # Sidebar Chat Area
+    with st.container(height=400, border=False):
+        for chat in st.session_state['chat_history']:
+            with st.chat_message(chat["role"]): 
+                st.markdown(f"<span style='font-size:0.85rem;'>{chat['content']}</span>", unsafe_allow_html=True)
+                
+    if user_q := st.chat_input("Ask a follow up?👀"):
+        st.session_state['chat_history'].append({"role": "user", "content": user_q})
+        chat_context = str(st.session_state.analysis_results) if st.session_state.analysis_results else "No report."
+        ans = chat_with_report(chat_context, user_q)
+        st.session_state['chat_history'].append({"role": "assistant", "content": ans})
         st.rerun()
 
 # --- HERO SECTION ---
@@ -193,18 +216,6 @@ with col_input:
                     st.session_state.analysis_results = generate_unified_analysis(st.session_state.extracted_text, context, symp_txt)
                 except Exception as e:
                     st.error(f"Analysis Failed: {e}")
-
-    # Chatbot
-    st.markdown("---")
-    st.subheader("💬 Ask Nalam AI")
-    for chat in st.session_state['chat_history']:
-        with st.chat_message(chat["role"]): st.markdown(chat["content"])
-    if user_q := st.chat_input("Ask a follow up?👀"):
-        st.session_state['chat_history'].append({"role": "user", "content": user_q})
-        chat_context = str(st.session_state.analysis_results) if st.session_state.analysis_results else "No report."
-        ans = chat_with_report(chat_context, user_q)
-        st.session_state['chat_history'].append({"role": "assistant", "content": ans})
-        st.rerun()
 
 with col_result:
     if st.session_state.analysis_results:
