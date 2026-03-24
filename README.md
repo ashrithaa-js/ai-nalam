@@ -1,4 +1,4 @@
-# 🧬 Nalam AI Assistant - Platinum Edition
+# 🧬 Nalam AI Assistant
 
 **"Empowering Healthcare Literacy through Intelligent Medical Analysis."**
 
