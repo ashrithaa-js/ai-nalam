@@ -20,3 +20,5 @@ gTTS
 deep-translator
 tiktoken
 pymupdf
+
+sarvamai
