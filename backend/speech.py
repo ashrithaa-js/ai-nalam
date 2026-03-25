@@ -4,23 +4,25 @@ import base64
 import tempfile
 from backend.config import Config
 from backend.logger import log_info, log_error
+from sarvamai import SarvamAI
+
 
 def speech_to_text(audio_file_path: str) -> str:
-    """
-    Transcribes Tamil audio to text using Sarvam AI ASR.
-    """
-    if not Config.SARVAM_API_KEY:
-        return "Error: SARVAM_API_KEY not set."
-
-    url = f"{Config.SARVAM_ASR_URL}"
-    headers = {"api-subscription-key": Config.SARVAM_API_KEY}
-    
     try:
-        with open(audio_file_path, "rb") as f:
-            files = {"file": f}
-            response = requests.post(url, files=files, headers=headers)
-            response.raise_for_status()
-            return response.json().get("transcript", "")
+        api_key = os.getenv("SARVAM_API_KEY")
+
+        if not api_key:
+            return "Error: SARVAM_API_KEY not set."
+
+        client = SarvamAI(api_subscription_key=api_key)
+
+        response = client.speech_to_text.transcribe(
+            file=open(audio_file_path, "rb"),
+            model="saarika:v2.5"
+        )
+
+        return response.transcript
+
     except Exception as e:
         log_error(f"Speech-to-Text error: {e}")
         return f"Error transcribing audio: {str(e)}"
